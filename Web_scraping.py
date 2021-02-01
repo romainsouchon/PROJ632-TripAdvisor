@@ -27,7 +27,7 @@ review = soup.find_all('p', {'class' : 'partial_entry'})
 
 note = soup.find_all('span', {'class' : 'ui_bubble_rating'})
 
-
+date = soup.find_all('span', {'class' : 'ratingDate'})
 for i in range(0, len(users)-1):
     print (users[i].string)
     print (review[i].string,'\n\n')
@@ -40,3 +40,4 @@ for i in range(0, len(review)-1):
 print(len(review))
 print(len(users))
 print(len(note))
+print(len(date))
