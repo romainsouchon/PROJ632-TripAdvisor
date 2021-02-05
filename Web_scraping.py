@@ -45,5 +45,20 @@ for i in range(0, len(users)-1):
     print (users[i].string)
     print (review_notes[i],'/ 5')
     print (review[i].string,'\n\n')
+    print(date[i].string)
+    
+commentaires = []   #ajout de la liste commentaires
+for i in range(0,len(users)-1):                 #un Dico = un avis
+    avis = {"pseudo" : users[i].string,         #Avec le pseudo
+            "note" : review_notes[i],           #La note sur 5
+            "commentaire" : review[i].string,   #Le com
+            "date" : date[i].string}            #La date
 
     
+    commentaires.append(avis)
+    
+for i in commentaires:
+    print(i, "\n\n")
+    
+    
+print(commentaires[2].get("pseudo"))
