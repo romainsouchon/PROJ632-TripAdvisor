@@ -7,9 +7,13 @@ Created on Mon Feb  1 10:03:40 2021
 
 import requests
 from bs4 import BeautifulSoup
+import re
 
+URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+res = re.split('Reviews',URL)
+res[0] += 'Reviews'
 
-req = requests.get('https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html')
+req = requests.get(URL)
 soup = BeautifulSoup(req.text, "lxml")
 
 soup.title
@@ -41,9 +45,5 @@ for i in range(0, len(users)-1):
     print (users[i].string)
     print (review_notes[i],'/ 5')
     print (review[i].string,'\n\n')
-    
 
-"""review = soup.find_all('p', {'class' : 'partial_entry'})
-for i in range(0, len(review)-1):
-    print ('review', i+1,'\n', review[i].string)"""
     
