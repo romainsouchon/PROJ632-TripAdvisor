@@ -25,11 +25,21 @@ users = soup.find_all('div', {'class' : 'info_text pointer_cursor'})
 
 review = soup.find_all('p', {'class' : 'partial_entry'})
 
-note = soup.find_all('span', {'class' : 'ui_bubble_rating'})
+notes = soup.find_all('span', {'class' : 'ui_bubble_rating'})
 
 date = soup.find_all('span', {'class' : 'ratingDate'})
+
+#notes des avis clean
+review_notes = []
+for note in notes[5:15]:
+    review_notes.append(str(note)[37:39])
+
+for i in range(0, len(review_notes)):
+    review_notes[i] = int(review_notes[i])//10
+    
 for i in range(0, len(users)-1):
     print (users[i].string)
+    print (review_notes[i],'/ 5')
     print (review[i].string,'\n\n')
     
 
@@ -37,7 +47,3 @@ for i in range(0, len(users)-1):
 for i in range(0, len(review)-1):
     print ('review', i+1,'\n', review[i].string)"""
     
-print(len(review))
-print(len(users))
-print(len(note))
-print(len(date))
