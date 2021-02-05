@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or30-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
 res = re.split('Reviews',URL)
 res[0] += 'Reviews'
 
@@ -41,7 +41,11 @@ for k in range(len(com_entier)):
     indice_debut = com_entier_str.find('<p class="partial_entry">') + 25
     indice_fin1 = com_entier_str.find('</p></div></div><div class="prw_rup prw_reviews_stay_date_hsx" data-prwidget-init="" data-prwidget-name="reviews_stay_date_hsx">')
     indice_fin2 = com_entier_str.find('</p></div></div><div class="prw_rup prw_reviews_inline_photos_hsx" data-prwidget-init="" data-prwidget-name="reviews_inline_photos_hsx">')
-    indice_fin=max(indice_fin1,indice_fin2)
+    indice_fin3 = com_entier_str.find('''<span class="taLnk ulBlueLinks" onclick="widgetEvCall('handlers.clickExpand',event,this);">Plus</span>''')
+    if indice_fin3 != -1:
+        indice_fin = indice_fin3
+    else:
+        indice_fin=max(indice_fin1,indice_fin2)
     com = com_entier_str[indice_debut:indice_fin]
     liste_com.append(com)
 
