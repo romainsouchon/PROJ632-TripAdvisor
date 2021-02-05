@@ -27,7 +27,9 @@ liste_com =[]
 for k in range(len(com_entier)):
     com_entier_str=str(com_entier[k])
     indice_debut = com_entier_str.find('<p class="partial_entry">') + 25
-    indice_fin = com_entier_str.find('</p></div></div><div class="prw_rup prw_reviews_stay_date_hsx" data-prwidget-init="" data-prwidget-name="reviews_stay_date_hsx">')
+    indice_fin1 = com_entier_str.find('</p></div></div><div class="prw_rup prw_reviews_stay_date_hsx" data-prwidget-init="" data-prwidget-name="reviews_stay_date_hsx">')
+    indice_fin2 = com_entier_str.find('</p></div></div><div class="prw_rup prw_reviews_inline_photos_hsx" data-prwidget-init="" data-prwidget-name="reviews_inline_photos_hsx">')
+    indice_fin=max(indice_fin1,indice_fin2)
     com = com_entier_str[indice_debut:indice_fin]
     liste_com.append(com)
 
@@ -52,7 +54,7 @@ print('note :', len(note))
 print('review :', len(review))
 print('date :', len(date), '\n')'''
 
-for i in range(0, len(users)-1):
+for i in range(0, len(users)):
     print (users[i].string, '\n')
     print ('note :',review_notes[i], '\n')
     print (liste_com[i], '\n')
