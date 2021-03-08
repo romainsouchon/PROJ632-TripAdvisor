@@ -10,7 +10,7 @@ import re
 
 liste_users = []
 
-def get_reviews(soup):
+def first_search(soup):
     print('-----------------------------------------')
     print('on est à la page :', int(soup.find('a', {'class' : re.compile('current')}).string))
     
@@ -31,10 +31,10 @@ def get_reviews(soup):
         
         
 #Brasserie le Z   
-URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+#URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
 
 #Resto Leo Paul
-#URL = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
+URL = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -42,26 +42,26 @@ nbre_de_pages = int(soup.find('a' , {'class' : 'pageNum last'}).string)
 
 
 
-get_reviews(soup)
+first_search(soup)
 
-def get_users():      
+def all_search():      
     for i in range(10,(nbre_de_pages)*10,10):
         #Brasserie le Z
-        URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+        #URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
         #Resto Leo Paul
-        #URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-or' + str(i) + '-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
+        URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-or' + str(i) + '-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
 
         page = requests.get(URL_reviews)
         soup = BeautifulSoup(page.content, 'html.parser')
         
-        get_reviews(soup)
+        first_search(soup)
         
     return liste_users
         
     
        
               
-print(get_users())   
+print(all_search())   
     
     
 

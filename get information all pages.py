@@ -8,6 +8,8 @@ Created on Mon Mar  8 08:53:13 2021
 import requests
 from bs4 import BeautifulSoup
 import re
+#from get_liste_users import first_search, all_search
+
 
 #URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
 URL = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
@@ -30,6 +32,7 @@ date = soup.find_all('span', {'class' : 'ratingDate'})
 
 
 
+liste_pseudo = []
     
 def get_reviews(soup): 
     #print('-----------------------------------------')
@@ -75,14 +78,18 @@ def get_reviews(soup):
      
     
     
+ 
     for i in commentaires:
+        
+        liste_pseudo.append(i['pseudo'])
         print (i, '\n')
-         
+        
     
-     
+        
+        
+        
   
-
-print(get_reviews(soup))      
+  
 
 
 def get_users():   #cette méthode retourne tous les users des autres pages   
@@ -94,8 +101,29 @@ def get_users():   #cette méthode retourne tous les users des autres pages
         soup = BeautifulSoup(page.content, 'html.parser')
         
         get_reviews(soup)
-
     
+    
+#PRINT
+      
+print(get_reviews(soup))    
 a = get_users()
-  
+#==============================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
