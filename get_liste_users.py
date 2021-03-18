@@ -11,8 +11,8 @@ import re
 liste_users = []
 
 def first_search(soup):
-    print('-----------------------------------------')
-    print('on est à la page :', int(soup.find('a', {'class' : re.compile('current')}).string))
+#    print('-----------------------------------------')
+#    print('on est à la page :', int(soup.find('a', {'class' : re.compile('current')}).string))
     
     
     #users
@@ -20,7 +20,7 @@ def first_search(soup):
         
     for i in range(0, len(users)):
         #all_users.append(users[i].string)
-        print (users[i].string)
+        #print (users[i].string)
         liste_users.append(users[i].string)
         
     
@@ -55,12 +55,10 @@ def all_search():
         first_search(soup)
         
     return liste_users
+ 
+
+
         
-    
-       
-              
-print(all_search())   
-    
     
 
 
