@@ -22,9 +22,7 @@ def first_search(soup):
         #all_users.append(users[i].string)
         print (users[i].string)
         liste_users.append(users[i].string)
-        #○print(all_users)
-        #print ('note :',review_notes[i], '\n')
-        #print (review[i].string, '\n\n')
+        
     
 
         

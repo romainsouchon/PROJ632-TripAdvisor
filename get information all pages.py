@@ -11,8 +11,8 @@ import re
 #from get_liste_users import first_search, all_search
 
 
-#URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
-URL = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
+URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+#URL = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -57,15 +57,15 @@ def get_reviews(soup):
         com = com_entier_str[indice_debut:indice_fin]
         liste_com.append(com)
         
-    '''
+    
     #notes des avis clean
     review_notes = []
-    for note in notes[5:15]:
+    for note in notes[4:14]:
         review_notes.append(str(note)[37:39])
     
     for i in range(0, len(review_notes)):
         review_notes[i] = int(review_notes[i])/10
-     '''   
+   
     
     commentaires = []   #ajout de la liste commentaires
     for i in range(0,len(users)):                 #un Dico = un avis
@@ -73,30 +73,22 @@ def get_reviews(soup):
                 "note" : review_notes[i],           #La note sur 5
                 "commentaire" : liste_com[i],       #Le com
                 "date" : date[i].string}            #La date
-    
+        
         commentaires.append(avis)
      
-    
-    
- 
+
     for i in commentaires:
-        
         liste_pseudo.append(i['pseudo'])
         print (i, '\n')
         
-    
-        
-        
-        
-  
-  
+
 
 
 def get_users():   #cette méthode retourne tous les users des autres pages   
     for i in range(10,(nbre_de_pages)*10,10):
         #Brasserie le Z
-        #URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
-        URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-or' + str(i) + '-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
+        URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+        #URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-or' + str(i) + '-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
         page = requests.get(URL_reviews)
         soup = BeautifulSoup(page.content, 'html.parser')
         
