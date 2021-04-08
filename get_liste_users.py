@@ -7,7 +7,7 @@ Created on Mon Feb  1 11:51:04 2021
 import requests
 from bs4 import BeautifulSoup
 import re
-
+from get_liste_urls_user import get_uid, get_url_user, liste_url_users, write_csv 
 liste_users = []
 
 def first_search(soup):
@@ -29,10 +29,10 @@ def first_search(soup):
         
         
 #Brasserie le Z   
-#URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
 
 #Resto Leo Paul
-URL = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
+#URL = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -45,19 +45,22 @@ first_search(soup)
 def all_search():      
     for i in range(10,(nbre_de_pages)*10,10):
         #Brasserie le Z
-        #URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+        URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
         #Resto Leo Paul
-        URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-or' + str(i) + '-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
+        # URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-or' + str(i) + '-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
+        liste_urls = []
+        for uid in get_uid():
+            liste_urls.append(get_url_user(URL_reviews,uid))
 
+    
         page = requests.get(URL_reviews)
         soup = BeautifulSoup(page.content, 'html.parser')
         
         first_search(soup)
         
-    return liste_users
+    return liste_url_users
  
-
-
+print(all_search())
         
     
 
