@@ -41,7 +41,7 @@ def get_uid(url):
         
         str_part = str(part)
         
-        content = str_part[880:962]
+        content = str_part[880:1000]
         uid.append(content)
     UID = []  
     for element in uid:
@@ -51,6 +51,9 @@ def get_uid(url):
                 UID.append(element[index:index + 50])
    
     return UID
+
+for i in get_uid('https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or20-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'):
+    print(i)
 
 
 def get_url_user(URL,uid):
@@ -95,6 +98,14 @@ def get_url_user(URL,uid):
 
 #     return liste_urls
 
+
+liste_uid = []
+with open('liste_uid.csv', 'r', newline = '') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        # print(row[0])
+        liste_uid.append(row[0])
+
 def write_csv():
     URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
 
@@ -104,7 +115,7 @@ def write_csv():
 
     nbre_de_pages = int(soup.find('a' , {'class' : 'pageNum last'}).string)
 
-    liste_uid = []
+    liste_urls = []
     for i in range(0,(nbre_de_pages)*10,10):
         print('-----------------------------------------')
         print('on est à la page :', int(soup.find('a', {'class' : re.compile('current')}).string))
@@ -115,13 +126,31 @@ def write_csv():
 
         
         for uid in get_uid(pages):
+            print(uid, pages)
             liste_urls.append(get_url_user(pages,uid))
 
+    ''' ecrire dans csv uid
     with open('liste_uid.csv', 'w', newline ='') as file:
+        for i in range(0,(nbre_de_pages)*10,10):
+            print('-----------------------------------------')
+            print('on est à la page :', int(soup.find('a', {'class' : re.compile('current')}).string))
+
+            pages = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
+            page = requests.get(pages)
+            soup = BeautifulSoup(page.content, 'html.parser')
+            writer = csv.writer(file, delimiter = ';')
+            # for row in dictio.keys():
+           
+            for row in get_uid(pages):
+                print(row)
+                writer.writerow([row])'''
+
+
+    with open('liste_url_users.csv', 'w', newline ='') as file:
         writer = csv.writer(file, delimiter = ';')
         # for row in dictio.keys():
        
-        for row in liste_uid:
+        for row in liste_urls:
             writer.writerow([row])
 
     return 'done'
