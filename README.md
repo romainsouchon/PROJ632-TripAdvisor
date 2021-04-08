@@ -9,7 +9,7 @@ here is their TripAdvisor page : [Brasserie le Z](https://www.tripadvisor.fr/Res
 2- sort username from one page  
 3- get all the username from all pages  
 4- for one user, sort his information from his own account (his posts, his comments, ...)  
-5- csv creation in order to have an access to url users 
+5- csv creation in order to have an access to url users   
 6- compare with specifical information in order to know if it's a possible fake.
 
  
