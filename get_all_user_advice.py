@@ -39,17 +39,19 @@ def get_full_com(lien):
     soup = BeautifulSoup(page.content, 'html.parser')
     return soup.find('p', {'class': 'partial_entry'})
 
+
 def tri_com(com):
     pos1 = com.find('<span class="fullText">')
     if pos1 != -1:
         pos2 = com.find("""</span>""")
-        rep = com[pos1 + len('<span class="fullText">') : pos2]
+        rep = com[pos1 + len('<span class="fullText">'): pos2]
 
     else:
         rep = com
 
     rep2 = rep.replace("<br/>", "\n")
     return rep2
+
 
 def get_avis_user(URL):
     page = requests.get(URL)
