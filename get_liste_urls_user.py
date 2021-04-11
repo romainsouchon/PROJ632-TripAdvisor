@@ -52,8 +52,6 @@ def get_uid(url):
    
     return UID
 
-for i in get_uid('https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or20-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'):
-    print(i)
 
 
 def get_url_user(URL,uid):
@@ -90,23 +88,17 @@ def get_url_user(URL,uid):
     return current_url
 
 
-
-# def liste_url_users():
-#     liste_urls = []
-#     for uid in get_uid():
-#         liste_urls.append(get_url_user(URL,uid))
-
-#     return liste_urls
-
-
 liste_uid = []
-with open('liste_uid.csv', 'r', newline = '') as f:
+with open('liste_url_users.csv', 'r', newline = '') as f:
     reader = csv.reader(f)
     for row in reader:
-        # print(row[0])
+        print(row[0])
         liste_uid.append(row[0])
 
 def write_csv():
+    '''
+    Ecrit dans un csv chaque adresse url des profils des utilisateurs
+    '''
     URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
 
     page = requests.get(URL)
@@ -129,22 +121,6 @@ def write_csv():
             print(uid, pages)
             liste_urls.append(get_url_user(pages,uid))
 
-    ''' ecrire dans csv uid
-    with open('liste_uid.csv', 'w', newline ='') as file:
-        for i in range(0,(nbre_de_pages)*10,10):
-            print('-----------------------------------------')
-            print('on est à la page :', int(soup.find('a', {'class' : re.compile('current')}).string))
-
-            pages = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
-            page = requests.get(pages)
-            soup = BeautifulSoup(page.content, 'html.parser')
-            writer = csv.writer(file, delimiter = ';')
-            # for row in dictio.keys():
-           
-            for row in get_uid(pages):
-                print(row)
-                writer.writerow([row])'''
-
 
     with open('liste_url_users.csv', 'w', newline ='') as file:
         writer = csv.writer(file, delimiter = ';')
@@ -157,36 +133,5 @@ def write_csv():
 
 print(write_csv())
 
-def all_urls():
-    URL = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
-
-    page = requests.get(URL)
-    soup = BeautifulSoup(page.content, "html.parser")
-
-
-    nbre_de_pages = int(soup.find('a' , {'class' : 'pageNum last'}).string)
-
-
-    liste_urls = []
-    liste_uid = []
-    for i in range(0,(nbre_de_pages)*10,10):
-        print('-----------------------------------------')
-        print('on est à la page :', int(soup.find('a', {'class' : re.compile('current')}).string))
-
-        pages = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
-        page = requests.get(pages)
-        soup = BeautifulSoup(page.content, 'html.parser')
-
-        for uid in get_uid(pages):
-            liste_uid.append(uid)
-
-        # for uid in get_uid(pages):
-        #     print('ttttttttttt', uid)
-        #     liste_urls.append(get_url_user(pages,uid))
-
-
-    return len(liste_uid)
-
-# print(all_urls())
 
 
