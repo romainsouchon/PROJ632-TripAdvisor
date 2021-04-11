@@ -1,6 +1,6 @@
 # PROJ632 TripAdvisor
 ## Goal 
-A TripAdvisor project that prevent fake reviews for a resataurant.  
+A TripAdvisor project that prevent fake reviews for a restaurant.  
   
 we took the restaurant : "BRASSERIE LE Z", 12 avenue des Ducs de Savoie, 73000 Chambéry France  
 here is their TripAdvisor page : [Brasserie le Z](https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html)
@@ -12,4 +12,7 @@ here is their TripAdvisor page : [Brasserie le Z](https://www.tripadvisor.fr/Res
 5- csv creation in order to have an access to url users   
 6- compare with specifical information in order to know if it's a possible fake.
 
+ -----------------------------------------
  
+ you can check the suspect_users.csv check who are the suspicious users concerning the date issues :  
+ for example a person who created his account and posted a comment the same time => it can be suspicious.
