@@ -7,8 +7,14 @@ Created on Thu Mar 18 10:43:56 2021
 
 import requests
 from bs4 import BeautifulSoup
+from difflib import SequenceMatcher
+import csv
+'''
+this program returns all the reviews that a user made
+'''
 
-URL = 'https://www.tripadvisor.fr/Profile/laurentlZ6447SK?tab=reviews&fid=e279cbb6-de0d-44ab-bee1-8e64f19f00b0'
+
+URL = 'https://www.tripadvisor.fr/Profile/207estellel'
 
 
 def prend_entre(chaine, debut, fin):
@@ -28,9 +34,12 @@ def if_not_parent(soup, type, classorid, nom):
 
 def get_date_com(lien):
     url = "https://www.tripadvisor.fr/" + lien
+    
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    return soup.find('span', {'class': 'ratingDate'})
+    date = soup.find('span', {'class': 'ratingDate'})
+
+    return date
 
 
 def get_full_com(lien):
@@ -75,10 +84,39 @@ def get_avis_user(URL):
         dico["date"].append(prend_entre(str(get_date_com(date[i].a["href"])), 'title="', '">'))
     return dico
 
+def get_member_date(URL):
+    a = get_avis_user(URL)  
+    page = requests.get(URL)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    member_date = str(soup.find('span', {'class' : '_1CdMKu4t'}))
+    return member_date[71:-7]
 
-a = get_avis_user(URL)
-for i in range(0, len(a["note"])):
-    print("pseudo = ", a["pseudo"])
-    print("note = ", a["note"][i])
-    print("commentaire = ", a["commentaire"][i])
-    print("date = ", a["date"][i])
+def get_date_review(URL):
+    a = get_avis_user(URL)
+    date_review = a['date'][0]
+    return date_review
+
+def print_infos(URL):
+    a = get_avis_user(URL)       
+    for i in range(0, len(a["note"])):
+        print("pseudo = ", a["pseudo"])
+        print("note = ", a["note"][i])
+        print("commentaire = ", a["commentaire"][i])
+        print("date = ", a["date"][i])
+    return '\n'
+
+
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
+
+def check_date(URL):
+    a = get_avis_user(URL)
+
+    member_date = get_member_date(URL)[14:]
+
+    date_review = a['date'][0]
+
+    return similar(date_review,member_date)
+
+
