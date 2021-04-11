@@ -7,7 +7,7 @@ Created on Mon Feb  1 11:51:04 2021
 import requests
 from bs4 import BeautifulSoup
 import re
-from get_liste_urls_user import get_uid, get_url_user, liste_url_users, write_csv 
+
 liste_users = []
 
 def first_search(soup):
@@ -48,9 +48,7 @@ def all_search():
         URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g8309764-d968592-Reviews-or' + str(i) + '-Brasserie_le_Z-Chambery_Savoie_Auvergne_Rhone_Alpes.html'
         #Resto Leo Paul
         # URL_reviews = 'https://www.tripadvisor.fr/Restaurant_Review-g187259-d20059901-Reviews-or' + str(i) + '-Restaurant_Leo_Paul-Aix_les_Bains_Savoie_Auvergne_Rhone_Alpes.html'
-        liste_urls = []
-        for uid in get_uid():
-            liste_urls.append(get_url_user(URL_reviews,uid))
+        
 
     
         page = requests.get(URL_reviews)
@@ -58,7 +56,7 @@ def all_search():
         
         first_search(soup)
         
-    return liste_url_users
+    return liste_users
  
 print(all_search())
         
