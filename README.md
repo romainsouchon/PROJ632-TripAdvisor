@@ -13,6 +13,6 @@ here is their TripAdvisor page : [Brasserie le Z](https://www.tripadvisor.fr/Res
 6- compare with specifical information in order to know if it's a possible fake.
 
  -----------------------------------------
- 
+ Results are situated in the "csv file".  
  you can check the suspect_users.csv check who are the suspicious users concerning the date issues :  
  for example a person who created his account and posted a comment the same time => it can be suspicious.
